@@ -1,0 +1,1 @@
+Actually the value of the energy eigenvalue at d=2 is -1.33724 not -1.335

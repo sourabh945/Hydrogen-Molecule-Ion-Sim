@@ -1,0 +1,7 @@
+./full
+ Enter the distance 
+2
+ Enter the value of the energy : 
+3
+ The solution of the equation is the founded at   -1.3350000000000000       and at           89 point
+Note: The following floating-point exceptions are signalling: IEEE_DENORMAL
