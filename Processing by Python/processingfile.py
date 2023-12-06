@@ -186,4 +186,3 @@ fig.colorbar(surf, shrink=0.5, aspect=8)
 plt.savefig(f"HMI anti bonding state {separation*10}.png")
 
 plt.show(block=True)
-
