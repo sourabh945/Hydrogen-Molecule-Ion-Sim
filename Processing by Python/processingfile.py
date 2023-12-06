@@ -5,6 +5,10 @@ from math import pow
 import os 
 from mpl_toolkits import mplot3d
 
+''' this program we use to operate on the data file we generate through 
+the fortran program here we are plot the graph with help of this program 
+here we make all the plots except some of the are made using the gnuplot 
+'''
 path = "./processed_csv_files"
 
 e = []
@@ -44,7 +48,6 @@ with open('angular.dat','r') as file :
 Radial = []
 E = []
 step = 20/200000
-
 
 with open(f'{path}/Hydrogen_Radial.csv',"a") as file :
     writer = csv.writer(file)
