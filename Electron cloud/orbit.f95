@@ -1,9 +1,19 @@
 program main 
    implicit none
-   
+
+   ! the logic behind this program is simple we just calculate the radial equation 
+   ! Because i am not good in file operation in FORTRAN  and i am still learning
+   ! so i just calculate the radial distribution and from that calculate the probability
+   ! finding the electron and multiply it with 100 or any other number and generate the 
+   ! resultant number random numbers and plot and we get the electron cloud 
+
+   ! every other thing is just copy paste and i do just to note make a very big and complex 
+   ! program but make two small programs 
+
    double precision , allocatable :: x(:) , si(:) , si1(:) 
    integer :: num_of_intervals , j ,count , points,i,value
-   double precision :: x_upper , x_lower , h , energy, normalizer , c2 , d , c_s , sum_all,sum_si=0 ,x1,y1,t,r
+   double precision :: x_upper , x_lower , h , energy, normalizer , c2 , d , c_s  
+   double precision :: x1,y1,t,r
    double precision , dimension(10) :: prob
    real , parameter :: pi = 3.141592653589793
    logical :: f1 
@@ -12,7 +22,6 @@ program main
    
    print*, "Enter the value of the energy : " 
    read*, energy
-   
    
    c2 = d*d*energy/4.0
    c_s = 0.6043499*c2 - 0.006188*c2*c2 - 0.0000589*c2*c2*c2 +2 
@@ -48,8 +57,7 @@ program main
        if(j == 1000*count+1) then
        		prob(count+1) = si(j)
        		count = count+1
-       	endif
-       	sum_all = sum_all + si(j)
+
    enddo
    do j = 1,5
    	points = prob(j)*100
@@ -78,8 +86,8 @@ program main
    stop
    
    contains
-   	    	
-   	double precision function func(val_x,val_y,val_y1) ! here the ODE we wanted to solve 
+   	    	! this is the radial equation 
+   	    double precision function func(val_x,val_y,val_y1) 
             double precision , intent(in) :: val_x,val_y,val_y1
             double precision :: result , mid_1 , mid_2 , val
             val = (val_x)
@@ -89,12 +97,12 @@ program main
             func = result 
             return 
         end function func
-
-        subroutine rkmethod(i)   ! here we calculate the value by the rk method and this is for 2nd order equation 
+                            ! here we calculate the value by the rk method and this is for 2nd order eq
+        subroutine rkmethod(i) 
             integer , intent(in) :: i
-            double precision :: k1,k2,k3,k4,k11,k12,k13,k14,result  ! here we use 4th order rk method for 2nd order ODE
+            double precision :: k1,k2,k3,k4,k11,k12,k13,k14,result  
             k11 = h*si1(i-1)
-            k1 = h*func(x(i-1),si(i-1),si1(i-1))
+            k1 = h*func(x(i-1),si(i-1),si1(i-1)) ! here we use 4th order rk method for 2nd order ODE
             k12 = (si1(i-1) + k1/2.0)*h
             k2 = h*func((x(i-1)+h/2.0),(si(i-1)+k11/2.0),(si1(i-1)+k1/2.0))
             k13 = (si1(i-1) + k2/2.0)*h
